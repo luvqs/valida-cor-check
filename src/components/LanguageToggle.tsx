@@ -2,6 +2,7 @@
 import { Flag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Language } from '@/utils/languageUtils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LanguageToggleProps {
   currentLanguage: Language;
@@ -15,19 +16,21 @@ const LanguageToggle = ({
   return (
     <div className="flex items-center gap-2">
       <Button
-        variant="ghost"
+        variant="outline"
         size="sm"
-        className={`flex items-center gap-1 language-toggle-btn ${currentLanguage === 'pt-BR' ? 'active' : ''}`}
+        className={`flex items-center gap-1 language-toggle-btn border-2 bg-transparent ${currentLanguage === 'pt-BR' ? 'active' : ''}`}
         onClick={() => onLanguageChange('pt-BR')}
+        style={{ color: 'currentcolor', borderColor: 'currentcolor' }}
       >
         <Flag className="h-4 w-4" />
         <span>BR</span>
       </Button>
       <Button
-        variant="ghost"
+        variant="outline"
         size="sm"
-        className={`flex items-center gap-1 language-toggle-btn ${currentLanguage === 'en-US' ? 'active' : ''}`}
+        className={`flex items-center gap-1 language-toggle-btn border-2 bg-transparent ${currentLanguage === 'en-US' ? 'active' : ''}`}
         onClick={() => onLanguageChange('en-US')}
+        style={{ color: 'currentcolor', borderColor: 'currentcolor' }}
       >
         <Flag className="h-4 w-4" />
         <span>EN</span>

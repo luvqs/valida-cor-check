@@ -7,6 +7,7 @@ import LanguageToggle from '@/components/LanguageToggle';
 import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@/utils/colorUtils';
 import { Language, translations } from '@/utils/languageUtils';
 import LucasVasquesLogo from '@/components/LucasVasquesLogo';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type HistoryItem = {
   foregroundColor: string;
@@ -20,6 +21,7 @@ const Index = () => {
   const [contrastRatio, setContrastRatio] = useState(0);
   const [history, setHistory] = useState<HistoryItem[]>([{ foregroundColor: '#FFB57E', backgroundColor: '#01212C' }]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  const isMobile = useIsMobile();
 
   const t = translations[language];
   
@@ -80,23 +82,30 @@ const Index = () => {
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
       <header className="p-4 flex justify-between items-center">
         <div className="flex gap-2">
-          <Button 
-            variant="outline" 
-            onClick={handleReset}
-            style={{ color: foregroundColor, borderColor: foregroundColor }}
-          >
-            {t.reset}
-          </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleInvert}
-            style={{ color: foregroundColor, borderColor: foregroundColor }}
-          >
-            {t.invert}
-          </Button>
+          {!isMobile ? (
+            <>
+              <Button 
+                variant="outline" 
+                onClick={handleReset}
+                className="border-2 bg-transparent"
+                style={{ color: foregroundColor, borderColor: foregroundColor }}
+              >
+                {t.reset}
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={handleInvert}
+                className="border-2 bg-transparent"
+                style={{ color: foregroundColor, borderColor: foregroundColor }}
+              >
+                {t.invert}
+              </Button>
+            </>
+          ) : null}
           <Button 
             variant="outline" 
             onClick={handleRandom}
+            className="border-2 bg-transparent"
             style={{ color: foregroundColor, borderColor: foregroundColor }}
           >
             {t.random}
@@ -164,7 +173,7 @@ const Index = () => {
               </div>
               
               <div>
-                <div className="mb-6 invisible">
+                <div className="mb-6 md:invisible hidden md:block">
                   <div className="flex gap-2">
                     <Button 
                       variant="outline" 
