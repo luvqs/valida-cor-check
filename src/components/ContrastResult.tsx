@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from '@/components/ui/card';
-import { getComplianceLevel } from '@/utils/colorUtils';
+import { getComplianceLevel, type ComplianceLevel } from '@/utils/colorUtils';
 import { Translations } from '@/utils/languageUtils';
 
 interface ContrastResultProps {
@@ -11,7 +11,7 @@ interface ContrastResultProps {
 const ContrastResult = ({ contrastRatio, translations }: ContrastResultProps) => {
   const complianceLevel = getComplianceLevel(contrastRatio);
   
-  const getLevelText = (level: string) => {
+  const getLevelText = (level: ComplianceLevel) => {
     switch (level) {
       case 'aaa':
         return translations.passesAAA;

@@ -144,7 +144,9 @@ export const getContrastRatio = (color1: string, color2: string): number => {
 };
 
 // Determines WCAG compliance level based on contrast ratio
-export const getComplianceLevel = (ratio: number): 'fail' | 'aa' | 'aaa' => {
+export type ComplianceLevel = 'fail' | 'aa-large' | 'aa' | 'aaa';
+
+export const getComplianceLevel = (ratio: number): ComplianceLevel => {
   if (ratio >= 7) {
     return 'aaa'; // AAA for normal text, AAA for large text
   } else if (ratio >= 4.5) {
