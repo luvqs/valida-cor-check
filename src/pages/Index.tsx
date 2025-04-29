@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
+import { Trash2, RefreshCw, Dices } from 'lucide-react';
 import ColorInput from '@/components/ColorInput';
 import ColorPreview from '@/components/ColorPreview';
 import LanguageToggle from '@/components/LanguageToggle';
@@ -90,7 +91,7 @@ const Index = () => {
                 className="border-2 bg-transparent"
                 style={{ color: foregroundColor, borderColor: foregroundColor }}
               >
-                {t.reset}
+                <Trash2 className="h-5 w-5" />
               </Button>
               <Button 
                 variant="outline" 
@@ -98,7 +99,7 @@ const Index = () => {
                 className="border-2 bg-transparent"
                 style={{ color: foregroundColor, borderColor: foregroundColor }}
               >
-                {t.invert}
+                <RefreshCw className="h-5 w-5" />
               </Button>
             </>
           ) : null}
@@ -108,7 +109,7 @@ const Index = () => {
             className="border-2 bg-transparent"
             style={{ color: foregroundColor, borderColor: foregroundColor }}
           >
-            {t.random}
+            <Dices className="h-5 w-5" />
           </Button>
         </div>
         <LanguageToggle 
@@ -128,42 +129,24 @@ const Index = () => {
 
         <div className="bg-background p-4 rounded-t-xl">
           <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-6">
+              <div className="text-3xl font-bold flex items-center justify-center gap-2">
+                <span>{contrastRatio}:1</span>
+                <span 
+                  className={`text-lg px-2 py-1 rounded ${
+                    complianceLevel === 'aaa' ? 'text-success bg-success/10' : 
+                    complianceLevel === 'aa' ? 'text-warning bg-warning/10' : 
+                    complianceLevel === 'aa-large' ? 'text-warning bg-warning/10' : 
+                    'text-destructive bg-destructive/10'
+                  }`}
+                >
+                  {complianceLevel.toUpperCase()}
+                </span>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <div className="mb-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-bold text-foreground">{t.contrastRatio}</h2>
-                    <div className="text-3xl font-bold flex items-center gap-2">
-                      <span>{contrastRatio}:1</span>
-                      <span 
-                        className={`text-lg px-2 py-1 rounded ${
-                          complianceLevel === 'aaa' ? 'text-success bg-success/10' : 
-                          complianceLevel === 'aa' ? 'text-warning bg-warning/10' : 
-                          complianceLevel === 'aa-large' ? 'text-warning bg-warning/10' : 
-                          'text-destructive bg-destructive/10'
-                        }`}
-                      >
-                        {complianceLevel.toUpperCase()}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="text-sm text-muted-foreground">
-                    <div className="grid grid-cols-2 gap-x-2">
-                      <div>{t.normalText}:</div>
-                      <div>{contrastRatio >= 4.5 ? '✓' : '✗'} AA</div>
-                      <div></div>
-                      <div>{contrastRatio >= 7 ? '✓' : '✗'} AAA</div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-x-2 mt-1">
-                      <div>{t.largeText}:</div>
-                      <div>{contrastRatio >= 3 ? '✓' : '✗'} AA</div>
-                      <div></div>
-                      <div>{contrastRatio >= 4.5 ? '✓' : '✗'} AAA</div>
-                    </div>
-                  </div>
-                </div>
-                
                 <ColorInput
                   title={t.foregroundColor}
                   initialColor={foregroundColor}
@@ -173,17 +156,6 @@ const Index = () => {
               </div>
               
               <div>
-                <div className="mb-6 md:invisible hidden md:block">
-                  <div className="flex gap-2">
-                    <Button 
-                      variant="outline" 
-                      className="opacity-0"
-                    >
-                      {t.reset}
-                    </Button>
-                  </div>
-                </div>
-                
                 <ColorInput
                   title={t.backgroundColor}
                   initialColor={backgroundColor}
@@ -194,8 +166,8 @@ const Index = () => {
             </div>
             
             <footer className="mt-8 text-center text-muted-foreground">
-              <p>
-                ValidaCor foi desenvolvido por <LucasVasquesLogo />
+              <p className="flex items-center justify-center gap-2">
+                <span className="font-bold">ValidaCor</span> foi desenvolvido por <LucasVasquesLogo />
               </p>
             </footer>
           </div>

@@ -1,5 +1,5 @@
 
-import { Flag } from 'lucide-react';
+import { Bird, Earth } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Language } from '@/utils/languageUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -22,8 +22,7 @@ const LanguageToggle = ({
         onClick={() => onLanguageChange('pt-BR')}
         style={{ color: 'currentcolor', borderColor: 'currentcolor' }}
       >
-        <Flag className="h-4 w-4" />
-        <span>BR</span>
+        <Bird className="h-4 w-4" />
       </Button>
       <Button
         variant="outline"
@@ -32,8 +31,7 @@ const LanguageToggle = ({
         onClick={() => onLanguageChange('en-US')}
         style={{ color: 'currentcolor', borderColor: 'currentcolor' }}
       >
-        <Flag className="h-4 w-4" />
-        <span>EN</span>
+        <Earth className="h-4 w-4" />
       </Button>
     </div>
   );

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Translations } from '@/utils/languageUtils';
 import { Textarea } from '@/components/ui/textarea';
+import { RefreshCw } from 'lucide-react';
 
 interface ColorPreviewProps {
   foregroundColor: string;
@@ -47,7 +48,7 @@ const ColorPreview = ({
           <h1 className="text-6xl font-bold mb-2">Aa</h1>
           <div className="text-4xl font-bold flex justify-center items-center gap-2">
             <span>{foregroundColor}</span>
-            <span>/</span>
+            <RefreshCw className="w-6 h-6" />
             <span>{backgroundColor}</span>
           </div>
         </div>
