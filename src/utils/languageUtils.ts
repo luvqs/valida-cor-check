@@ -24,6 +24,7 @@ export interface Translations {
   fails: string;
   testingContrast: string;
   typeYourTextHere: string;
+  characters: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -48,8 +49,9 @@ export const translations: Record<Language, Translations> = {
     passesAAALarge: 'Passa AAA (Texto Grande)',
     passesAAA: 'Passa AAA',
     fails: 'Falha',
-    testingContrast: 'Testando contraste\n\nEste é um exemplo de texto para testar o contraste entre as cores selecionadas. Você pode editar este texto para ver como ficará com suas próprias palavras. O objetivo é garantir que o texto seja legível com o contraste atual.',
-    typeYourTextHere: 'Digite seu texto aqui...'
+    testingContrast: 'Digite alguma coisa aqui para você visualizar o contrates da frase que voce precisa testar.',
+    typeYourTextHere: 'Digite seu texto aqui...',
+    characters: 'caracteres'
   },
   'en-US': {
     appTitle: 'ValidaCor - Color Contrast Validator',
@@ -72,7 +74,8 @@ export const translations: Record<Language, Translations> = {
     passesAAALarge: 'Passes AAA (Large Text)',
     passesAAA: 'Passes AAA',
     fails: 'Fails',
-    testingContrast: 'Testing contrast\n\nThis is a sample text to test the contrast between the selected colors. You can edit this text to see how it looks with your own words. The goal is to ensure the text is readable with the current contrast.',
-    typeYourTextHere: 'Type your text here...'
+    testingContrast: 'Type something here to visualize the contrast of the phrase you need to test.',
+    typeYourTextHere: 'Type your text here...',
+    characters: 'characters'
   }
 };

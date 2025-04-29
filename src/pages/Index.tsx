@@ -1,50 +1,107 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import ColorInput from '@/components/ColorInput';
 import ColorPreview from '@/components/ColorPreview';
 import LanguageToggle from '@/components/LanguageToggle';
 import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@/utils/colorUtils';
 import { Language, translations } from '@/utils/languageUtils';
+import LucasVasquesLogo from '@/components/LucasVasquesLogo';
+
+type HistoryItem = {
+  foregroundColor: string;
+  backgroundColor: string;
+};
 
 const Index = () => {
   const [language, setLanguage] = useState<Language>('pt-BR');
-  const [foregroundColor, setForegroundColor] = useState('#000000');
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
-  const [contrastRatio, setContrastRatio] = useState(21);
+  const [foregroundColor, setForegroundColor] = useState('#FFB57E');
+  const [backgroundColor, setBackgroundColor] = useState('#01212C');
+  const [contrastRatio, setContrastRatio] = useState(0);
+  const [history, setHistory] = useState<HistoryItem[]>([{ foregroundColor: '#FFB57E', backgroundColor: '#01212C' }]);
+  const [historyIndex, setHistoryIndex] = useState(0);
 
   const t = translations[language];
   
+  const saveToHistory = useCallback((fg: string, bg: string) => {
+    if (fg === history[historyIndex]?.foregroundColor && bg === history[historyIndex]?.backgroundColor) return;
+    
+    const newHistory = history.slice(0, historyIndex + 1);
+    newHistory.push({ foregroundColor: fg, backgroundColor: bg });
+    setHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
+  }, [history, historyIndex]);
+
+  const updateColors = useCallback((fg: string, bg: string) => {
+    setForegroundColor(fg);
+    setBackgroundColor(bg);
+    saveToHistory(fg, bg);
+  }, [saveToHistory]);
+
   useEffect(() => {
     const ratio = getContrastRatio(foregroundColor, backgroundColor);
     setContrastRatio(ratio);
     document.title = t.appTitle;
   }, [foregroundColor, backgroundColor, language, t.appTitle]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Handle Ctrl+Z (undo)
+      if (e.ctrlKey && e.key === 'z' && historyIndex > 0) {
+        e.preventDefault();
+        const prevIndex = historyIndex - 1;
+        const prevItem = history[prevIndex];
+        setForegroundColor(prevItem.foregroundColor);
+        setBackgroundColor(prevItem.backgroundColor);
+        setHistoryIndex(prevIndex);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [history, historyIndex]);
   
   const handleReset = () => {
-    setForegroundColor('#000000');
-    setBackgroundColor('#FFFFFF');
+    updateColors('#FFB57E', '#01212C');
   };
   
   const handleInvert = () => {
-    setForegroundColor(backgroundColor);
-    setBackgroundColor(foregroundColor);
+    updateColors(backgroundColor, foregroundColor);
   };
   
   const handleRandom = () => {
     const { foreground, background } = generateContrastingPair();
-    setForegroundColor(foreground.hex);
-    setBackgroundColor(background.hex);
+    updateColors(foreground.hex, background.hex);
   };
 
   const complianceLevel = getComplianceLevel(contrastRatio);
   
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
-      <header className="p-4 flex justify-between">
-        <h1 className="text-xl font-bold" style={{ color: foregroundColor }}>
-          ValidaCor
-        </h1>
+      <header className="p-4 flex justify-between items-center">
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            onClick={handleReset}
+            style={{ color: foregroundColor, borderColor: foregroundColor }}
+          >
+            {t.reset}
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={handleInvert}
+            style={{ color: foregroundColor, borderColor: foregroundColor }}
+          >
+            {t.invert}
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={handleRandom}
+            style={{ color: foregroundColor, borderColor: foregroundColor }}
+          >
+            {t.random}
+          </Button>
+        </div>
         <LanguageToggle 
           currentLanguage={language} 
           onLanguageChange={setLanguage} 
@@ -107,25 +164,13 @@ const Index = () => {
               </div>
               
               <div>
-                <div className="mb-6">
+                <div className="mb-6 invisible">
                   <div className="flex gap-2">
                     <Button 
                       variant="outline" 
-                      onClick={handleReset}
+                      className="opacity-0"
                     >
                       {t.reset}
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={handleInvert}
-                    >
-                      {t.invert}
-                    </Button>
-                    <Button 
-                      variant="default" 
-                      onClick={handleRandom}
-                    >
-                      {t.random}
                     </Button>
                   </div>
                 </div>
@@ -141,7 +186,7 @@ const Index = () => {
             
             <footer className="mt-8 text-center text-muted-foreground">
               <p>
-                ValidaCor - {new Date().getFullYear()}
+                ValidaCor foi desenvolvido por <LucasVasquesLogo />
               </p>
             </footer>
           </div>

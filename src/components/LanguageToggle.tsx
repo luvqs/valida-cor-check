@@ -13,11 +13,11 @@ const LanguageToggle = ({
   onLanguageChange
 }: LanguageToggleProps) => {
   return (
-    <div className="absolute top-4 right-4 flex items-center gap-2">
+    <div className="flex items-center gap-2">
       <Button
         variant="ghost"
         size="sm"
-        className={`flex items-center gap-1 ${currentLanguage === 'pt-BR' ? 'bg-secondary' : ''}`}
+        className={`flex items-center gap-1 language-toggle-btn ${currentLanguage === 'pt-BR' ? 'active' : ''}`}
         onClick={() => onLanguageChange('pt-BR')}
       >
         <Flag className="h-4 w-4" />
@@ -26,7 +26,7 @@ const LanguageToggle = ({
       <Button
         variant="ghost"
         size="sm"
-        className={`flex items-center gap-1 ${currentLanguage === 'en-US' ? 'bg-secondary' : ''}`}
+        className={`flex items-center gap-1 language-toggle-btn ${currentLanguage === 'en-US' ? 'active' : ''}`}
         onClick={() => onLanguageChange('en-US')}
       >
         <Flag className="h-4 w-4" />

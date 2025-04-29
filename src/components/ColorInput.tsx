@@ -1,8 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { hexToHsl, hslToHex, isValidHex } from '@/utils/colorUtils';
 import { Translations } from '@/utils/languageUtils';
@@ -29,8 +28,14 @@ const ColorInput = ({
     setHsl(hexToHsl(initialColor));
   }, [initialColor]);
 
-  const handleHexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newHex = e.target.value;
+  const handleHexChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let newHex = e.target.value.trim();
+    
+    // Add # if missing
+    if (!newHex.startsWith('#') && newHex) {
+      newHex = '#' + newHex;
+    }
+    
     setHexValue(newHex);
     
     if (isValidHex(newHex)) {

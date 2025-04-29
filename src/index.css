@@ -143,3 +143,11 @@
 .contrast-level-aaa {
   @apply bg-success/20 text-success border border-success/20;
 }
+
+.language-toggle-btn {
+  @apply transition-all duration-300;
+}
+
+.language-toggle-btn.active {
+  @apply bg-secondary transform scale-105;
+}
