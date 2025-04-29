@@ -1,6 +1,7 @@
 
-import { Card, CardContent } from '@/components/ui/card';
+import { useState } from 'react';
 import { Translations } from '@/utils/languageUtils';
+import { Textarea } from '@/components/ui/textarea';
 
 interface ColorPreviewProps {
   foregroundColor: string;
@@ -13,28 +14,35 @@ const ColorPreview = ({
   backgroundColor,
   translations
 }: ColorPreviewProps) => {
+  const [previewText, setPreviewText] = useState<string>(translations.testingContrast);
+
   return (
-    <Card className="shadow-sm">
-      <CardContent className="p-0">
-        <div
-          className="flex flex-col items-center justify-center p-6 h-full w-full"
-          style={{
-            backgroundColor: backgroundColor,
-            color: foregroundColor,
-          }}
-        >
-          <h3 className="text-2xl font-bold mb-4">
-            {translations.contrastPreview}
-          </h3>
-          <p className="text-base mb-4">
-            {translations.normalText} - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-          </p>
-          <p className="text-xl font-bold">
-            {translations.largeText} - Lorem ipsum dolor sit amet.
-          </p>
+    <div 
+      className="w-full h-full flex flex-col items-center justify-center p-8"
+      style={{
+        backgroundColor: backgroundColor,
+        color: foregroundColor,
+      }}
+    >
+      <div className="max-w-2xl mx-auto w-full">
+        <div className="mb-8 text-center">
+          <h1 className="text-6xl font-bold mb-2">Aa</h1>
+          <div className="text-4xl font-bold flex justify-center items-center gap-2">
+            <span>{foregroundColor}</span>
+            <span>/</span>
+            <span>{backgroundColor}</span>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+
+        <Textarea
+          value={previewText}
+          onChange={(e) => setPreviewText(e.target.value)}
+          className="w-full text-xl bg-transparent border-none resize-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder-current placeholder-opacity-50"
+          style={{ color: foregroundColor }}
+          placeholder={translations.typeYourTextHere}
+        />
+      </div>
+    </div>
   );
 };
 
