@@ -13,7 +13,7 @@ const LucasVasquesLogo: React.FC = () => {
       <img 
         src={logoSvg} 
         alt="Logo Lucas Vasques" 
-        className="h-4 inline-block"
+        className="h-4 max-h-[16px] inline-block"
       />
     </a>
   );

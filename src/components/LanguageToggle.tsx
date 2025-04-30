@@ -6,21 +6,25 @@ import { useIsMobile } from '@/hooks/use-mobile';
 interface LanguageToggleProps {
   currentLanguage: Language;
   onLanguageChange: (language: Language) => void;
+  foregroundColor?: string;
 }
 
 const LanguageToggle = ({
   currentLanguage,
-  onLanguageChange
+  onLanguageChange,
+  foregroundColor
 }: LanguageToggleProps) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-4">
       <Bird
-        className={`h-5 w-5 cursor-pointer transition-all duration-300 ${currentLanguage === 'pt-BR' ? 'scale-105' : ''}`}
+        className="w-[30px] h-[30px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#01212C] rounded-md p-1"
         onClick={() => onLanguageChange('pt-BR')}
+        style={{ color: foregroundColor }}
       />
       <Earth
-        className={`h-5 w-5 cursor-pointer transition-all duration-300 ${currentLanguage === 'en-US' ? 'scale-105' : ''}`}
+        className="w-[30px] h-[30px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#01212C] rounded-md p-1"
         onClick={() => onLanguageChange('en-US')}
+        style={{ color: foregroundColor }}
       />
     </div>
   );

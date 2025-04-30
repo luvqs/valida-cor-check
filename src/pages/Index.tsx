@@ -7,7 +7,7 @@ import LanguageToggle from '@/components/LanguageToggle';
 import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@/utils/colorUtils';
 import { Language, translations } from '@/utils/languageUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import logoSvg from '@/assets/logo-2024-preto.svg';
+import LucasVasquesLogo from '@/components/LucasVasquesLogo';
 import { Link } from 'react-router-dom';
 
 type HistoryItem = {
@@ -79,41 +79,44 @@ const Index = () => {
 
   const complianceLevel = getComplianceLevel(contrastRatio);
   
+  const iconClass = "w-[30px] h-[30px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#01212C] rounded-md p-1";
+  
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
       <header className="p-4 flex justify-between items-center">
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           {!isMobile && (
             <>
               <Trash2 
-                className="h-5 w-5 cursor-pointer" 
+                className={iconClass}
                 style={{ color: foregroundColor }}
                 onClick={handleReset}
               />
               <ArrowLeftRight 
-                className="h-5 w-5 cursor-pointer"
+                className={iconClass}
                 style={{ color: foregroundColor }}
                 onClick={handleInvert}
               />
             </>
           )}
           <Dices 
-            className="h-5 w-5 cursor-pointer"
+            className={iconClass}
             style={{ color: foregroundColor }}
             onClick={handleRandom}
           />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <Link to="/about">
             <LinkIcon 
-              className="h-5 w-5 cursor-pointer" 
+              className={iconClass}
               style={{ color: foregroundColor }}
             />
           </Link>
           <LanguageToggle 
             currentLanguage={language} 
             onLanguageChange={setLanguage} 
+            foregroundColor={foregroundColor}
           />
         </div>
       </header>
@@ -169,20 +172,10 @@ const Index = () => {
               </div>
             </div>
             
-            <footer className="mt-8 text-center text-muted-foreground text-xs flex justify-center items-center gap-1.5 opacity-50">
+            <footer className="mt-8 text-center text-muted-foreground text-xs flex justify-center items-center gap-1.5 opacity-40">
               <span className="font-bold">ValidaCor</span> 
               <span>foi desenvolvido por</span> 
-              <a 
-                href="https://lucasvasques.com.br/contato/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <img 
-                  src={logoSvg} 
-                  alt="Logo Lucas Vasques" 
-                  className="h-4 inline-block"
-                />
-              </a>
+              <LucasVasquesLogo />
             </footer>
           </div>
         </div>
