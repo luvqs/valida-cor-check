@@ -1,13 +1,12 @@
 
 import { useState, useEffect, useCallback } from 'react';
-import { Dices, ArrowLeftRight, Trash2, Link as LinkIcon } from 'lucide-react';
+import { UndoDot, ArrowLeftRight, Dices, Link as LinkIcon } from 'lucide-react';
 import ColorInput from '@/components/ColorInput';
 import ColorPreview from '@/components/ColorPreview';
 import LanguageToggle from '@/components/LanguageToggle';
 import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@/utils/colorUtils';
 import { Language, translations } from '@/utils/languageUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import LucasVasquesLogo from '@/components/LucasVasquesLogo';
 import { Link } from 'react-router-dom';
 
 type HistoryItem = {
@@ -79,7 +78,20 @@ const Index = () => {
 
   const complianceLevel = getComplianceLevel(contrastRatio);
   
-  const iconClass = "w-[30px] h-[30px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#01212C] rounded-md p-1";
+  const getComplianceLevelDisplayText = (level: string) => {
+    if (language === 'pt-BR') {
+      switch(level) {
+        case 'fail': return 'Tá bem ruim';
+        case 'aa-large': return 'A (Fontes grandes)';
+        case 'aa': return 'AA (Legalzinho)';
+        case 'aaa': return 'AAA (Excelente)';
+        default: return level.toUpperCase();
+      }
+    }
+    return level.toUpperCase();
+  };
+  
+  const iconClass = "w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1";
   
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
@@ -87,7 +99,7 @@ const Index = () => {
         <div className="flex gap-6">
           {!isMobile && (
             <>
-              <Trash2 
+              <UndoDot 
                 className={iconClass}
                 style={{ color: foregroundColor }}
                 onClick={handleReset}
@@ -134,20 +146,20 @@ const Index = () => {
         <div className="bg-background p-4 rounded-t-xl">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-6">
-              <div className="text-sm text-muted-foreground mb-1">
-                {t.contrastRatio}:
-              </div>
-              <div className="text-3xl font-bold flex items-center justify-center gap-2">
-                <span>{contrastRatio}:1</span>
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  {t.contrastRatio}:
+                </span>
+                <span className="text-5xl font-bold">{contrastRatio}:1</span>
                 <span 
-                  className={`text-lg px-2 py-1 rounded ${
+                  className={`text-3xl px-2 py-1 rounded ${
                     complianceLevel === 'aaa' ? 'text-success bg-success/10' : 
                     complianceLevel === 'aa' ? 'text-warning bg-warning/10' : 
                     complianceLevel === 'aa-large' ? 'text-warning bg-warning/10' : 
                     'text-destructive bg-destructive/10'
                   }`}
                 >
-                  {complianceLevel.toUpperCase()}
+                  {getComplianceLevelDisplayText(complianceLevel)}
                 </span>
               </div>
             </div>
@@ -175,7 +187,14 @@ const Index = () => {
             <footer className="mt-8 text-center text-muted-foreground text-xs flex justify-center items-center gap-1.5 opacity-40">
               <span className="font-bold">ValidaCor</span> 
               <span>foi desenvolvido por</span> 
-              <LucasVasquesLogo />
+              <a 
+                href="https://lucasvasques.com.br/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:underline"
+              >
+                @luvqs
+              </a>
             </footer>
           </div>
         </div>

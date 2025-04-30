@@ -17,12 +17,12 @@ const LanguageToggle = ({
   return (
     <div className="flex items-center gap-4">
       <Bird
-        className="w-[30px] h-[30px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#01212C] rounded-md p-1"
+        className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
         onClick={() => onLanguageChange('pt-BR')}
         style={{ color: foregroundColor }}
       />
       <Earth
-        className="w-[30px] h-[30px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#01212C] rounded-md p-1"
+        className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
         onClick={() => onLanguageChange('en-US')}
         style={{ color: foregroundColor }}
       />
