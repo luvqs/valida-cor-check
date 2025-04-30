@@ -1,14 +1,12 @@
 
 import { useState, useEffect, useCallback } from 'react';
-import { UndoDot, ArrowLeftRight, Dices, Link as LinkIcon } from 'lucide-react';
-import ColorInput from '@/components/ColorInput';
+import Header from '@/components/Header';
 import ColorPreview from '@/components/ColorPreview';
-import LanguageToggle from '@/components/LanguageToggle';
-import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@/utils/colorUtils';
+import ContrastDisplay from '@/components/ContrastDisplay';
+import ColorControls from '@/components/ColorControls';
+import Footer from '@/components/Footer';
+import { getContrastRatio, generateContrastingPair } from '@/utils/colorUtils';
 import { Language, translations } from '@/utils/languageUtils';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { Link } from 'react-router-dom';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type HistoryItem = {
   foregroundColor: string;
@@ -22,8 +20,7 @@ const Index = () => {
   const [contrastRatio, setContrastRatio] = useState(0);
   const [history, setHistory] = useState<HistoryItem[]>([{ foregroundColor: '#FFB57E', backgroundColor: '#01212C' }]);
   const [historyIndex, setHistoryIndex] = useState(0);
-  const isMobile = useIsMobile();
-
+  
   const t = translations[language];
   
   const saveToHistory = useCallback((fg: string, bg: string) => {
@@ -76,94 +73,18 @@ const Index = () => {
     const { foreground, background } = generateContrastingPair();
     updateColors(foreground.hex, background.hex);
   };
-
-  const complianceLevel = getComplianceLevel(contrastRatio);
-  
-  const getComplianceLevelDisplayText = (level: string) => {
-    if (language === 'pt-BR') {
-      switch(level) {
-        case 'fail': return 'Tá bem ruim';
-        case 'aa-large': return 'A (Fontes grandes)';
-        case 'aa': return 'AA (Legalzinho)';
-        case 'aaa': return 'AAA (Excelente)';
-        default: return level.toUpperCase();
-      }
-    }
-    return level.toUpperCase();
-  };
-  
-  const iconClass = "w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1";
   
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
-      <header className="p-4 flex justify-between items-center">
-        <div className="flex gap-6">
-          {!isMobile && (
-            <>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <UndoDot 
-                    className={iconClass}
-                    style={{ color: foregroundColor }}
-                    onClick={handleReset}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  {language === 'pt-BR' ? 'Redefinir cores' : 'Reset colors'}
-                </TooltipContent>
-              </Tooltip>
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <ArrowLeftRight 
-                    className={iconClass}
-                    style={{ color: foregroundColor }}
-                    onClick={handleInvert}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  {language === 'pt-BR' ? 'Inverter cores' : 'Invert colors'}
-                </TooltipContent>
-              </Tooltip>
-            </>
-          )}
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Dices 
-                className={iconClass}
-                style={{ color: foregroundColor }}
-                onClick={handleRandom}
-              />
-            </TooltipTrigger>
-            <TooltipContent>
-              {language === 'pt-BR' ? 'Cores aleatórias' : 'Random colors'}
-            </TooltipContent>
-          </Tooltip>
-        </div>
-
-        <div className="flex items-center gap-6">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link to="/about">
-                <LinkIcon 
-                  className={iconClass}
-                  style={{ color: foregroundColor }}
-                />
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>
-              {language === 'pt-BR' ? 'Sobre o ValidaCor' : 'About ValidaCor'}
-            </TooltipContent>
-          </Tooltip>
-          
-          <LanguageToggle 
-            currentLanguage={language} 
-            onLanguageChange={setLanguage} 
-            foregroundColor={foregroundColor}
-          />
-        </div>
-      </header>
+      <Header 
+        language={language}
+        foregroundColor={foregroundColor}
+        backgroundColor={backgroundColor}
+        setLanguage={setLanguage}
+        onReset={handleReset}
+        onInvert={handleInvert}
+        onRandom={handleRandom}
+      />
       
       <div className="flex flex-col flex-grow">
         <div className="flex-grow">
@@ -177,57 +98,21 @@ const Index = () => {
 
         <div className="bg-background p-4 rounded-t-xl">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6 py-2">
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm text-muted-foreground">
-                  {t.contrastRatio}:
-                </span>
-                <span className="text-5xl font-bold">{contrastRatio}:1</span>
-                <span 
-                  className={`text-3xl px-2 py-1 rounded ${
-                    complianceLevel === 'aaa' ? 'text-success bg-success/10' : 
-                    complianceLevel === 'aa' ? 'text-warning bg-warning/10' : 
-                    complianceLevel === 'aa-large' ? 'text-warning bg-warning/10' : 
-                    'text-destructive bg-destructive/10'
-                  }`}
-                >
-                  {getComplianceLevelDisplayText(complianceLevel)}
-                </span>
-              </div>
-            </div>
+            <ContrastDisplay 
+              contrastRatio={contrastRatio}
+              language={language}
+              t={t}
+            />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <ColorInput
-                  title={t.foregroundColor}
-                  initialColor={foregroundColor}
-                  onColorChange={setForegroundColor}
-                  translations={t}
-                />
-              </div>
-              
-              <div>
-                <ColorInput
-                  title={t.backgroundColor}
-                  initialColor={backgroundColor}
-                  onColorChange={setBackgroundColor}
-                  translations={t}
-                />
-              </div>
-            </div>
+            <ColorControls 
+              foregroundColor={foregroundColor}
+              backgroundColor={backgroundColor}
+              setForegroundColor={setForegroundColor}
+              setBackgroundColor={setBackgroundColor}
+              translations={t}
+            />
             
-            <footer className="mt-8 text-center text-[#363c4a] text-xs flex justify-center items-center gap-1.5 opacity-40">
-              <span className="font-bold">ValidaCor</span> 
-              <span>foi desenvolvido por</span> 
-              <a 
-                href="https://lucasvasques.com.br/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium hover:underline"
-              >
-                @luvqs
-              </a>
-            </footer>
+            <Footer />
           </div>
         </div>
       </div>

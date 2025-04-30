@@ -59,7 +59,7 @@ const ColorPreview = ({
                 />
               </TooltipTrigger>
               <TooltipContent>
-                {translations.language === 'pt-BR' ? 'Inverter cores' : 'Invert colors'}
+                {translations.invert}
               </TooltipContent>
             </Tooltip>
             <span>{backgroundColor}</span>
