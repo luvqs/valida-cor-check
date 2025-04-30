@@ -8,6 +8,7 @@ import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@
 import { Language, translations } from '@/utils/languageUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Link } from 'react-router-dom';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type HistoryItem = {
   foregroundColor: string;
@@ -99,32 +100,63 @@ const Index = () => {
         <div className="flex gap-6">
           {!isMobile && (
             <>
-              <UndoDot 
-                className={iconClass}
-                style={{ color: foregroundColor }}
-                onClick={handleReset}
-              />
-              <ArrowLeftRight 
-                className={iconClass}
-                style={{ color: foregroundColor }}
-                onClick={handleInvert}
-              />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <UndoDot 
+                    className={iconClass}
+                    style={{ color: foregroundColor }}
+                    onClick={handleReset}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  {language === 'pt-BR' ? 'Redefinir cores' : 'Reset colors'}
+                </TooltipContent>
+              </Tooltip>
+              
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <ArrowLeftRight 
+                    className={iconClass}
+                    style={{ color: foregroundColor }}
+                    onClick={handleInvert}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  {language === 'pt-BR' ? 'Inverter cores' : 'Invert colors'}
+                </TooltipContent>
+              </Tooltip>
             </>
           )}
-          <Dices 
-            className={iconClass}
-            style={{ color: foregroundColor }}
-            onClick={handleRandom}
-          />
+          
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Dices 
+                className={iconClass}
+                style={{ color: foregroundColor }}
+                onClick={handleRandom}
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              {language === 'pt-BR' ? 'Cores aleatórias' : 'Random colors'}
+            </TooltipContent>
+          </Tooltip>
         </div>
 
         <div className="flex items-center gap-6">
-          <Link to="/about">
-            <LinkIcon 
-              className={iconClass}
-              style={{ color: foregroundColor }}
-            />
-          </Link>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link to="/about">
+                <LinkIcon 
+                  className={iconClass}
+                  style={{ color: foregroundColor }}
+                />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              {language === 'pt-BR' ? 'Sobre o ValidaCor' : 'About ValidaCor'}
+            </TooltipContent>
+          </Tooltip>
+          
           <LanguageToggle 
             currentLanguage={language} 
             onLanguageChange={setLanguage} 
@@ -145,7 +177,7 @@ const Index = () => {
 
         <div className="bg-background p-4 rounded-t-xl">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6">
+            <div className="text-center mb-6 py-2">
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm text-muted-foreground">
                   {t.contrastRatio}:
@@ -184,7 +216,7 @@ const Index = () => {
               </div>
             </div>
             
-            <footer className="mt-8 text-center text-muted-foreground text-xs flex justify-center items-center gap-1.5 opacity-40">
+            <footer className="mt-8 text-center text-[#363c4a] text-xs flex justify-center items-center gap-1.5 opacity-40">
               <span className="font-bold">ValidaCor</span> 
               <span>foi desenvolvido por</span> 
               <a 

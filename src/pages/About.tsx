@@ -5,7 +5,7 @@ import { Language, translations } from '@/utils/languageUtils';
 import LanguageToggle from '@/components/LanguageToggle';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logoSvg from '@/assets/logo-2024-preto.svg';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 const About = () => {
   const [language, setLanguage] = useState<Language>('pt-BR');
@@ -14,11 +14,18 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="p-4 flex justify-between items-center">
-        <Link to="/">
-          <ArrowLeft 
-            className="h-5 w-5 cursor-pointer" 
-          />
-        </Link>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link to="/">
+              <ArrowLeft 
+                className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1" 
+              />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            {language === 'pt-BR' ? 'Voltar' : 'Back'}
+          </TooltipContent>
+        </Tooltip>
         <LanguageToggle 
           currentLanguage={language} 
           onLanguageChange={setLanguage} 
@@ -120,14 +127,17 @@ const About = () => {
         </div>
       </div>
 
-      <footer className="mt-auto p-4 text-center text-muted-foreground text-xs flex justify-center items-center gap-1.5 opacity-70">
+      <footer className="mt-auto p-4 text-center text-[#363c4a] text-xs flex justify-center items-center gap-1.5 opacity-40">
         <span className="font-bold">ValidaCor</span> 
         <span>foi desenvolvido por</span> 
-        <img 
-          src={logoSvg} 
-          alt="Logo Lucas Vasques" 
-          className="h-4 inline-block"
-        />
+        <a 
+          href="https://lucasvasques.com.br/" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium hover:underline"
+        >
+          @luvqs
+        </a>
       </footer>
     </div>
   );

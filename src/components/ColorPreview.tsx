@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Translations } from '@/utils/languageUtils';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeftRight } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface ColorPreviewProps {
   foregroundColor: string;
@@ -50,10 +51,17 @@ const ColorPreview = ({
           <h1 className="text-6xl font-bold mb-2">Aa aa AA</h1>
           <div className="text-4xl font-bold flex justify-center items-center gap-4">
             <span>{foregroundColor}</span>
-            <ArrowLeftRight 
-              className="w-6 h-6 cursor-pointer" 
-              onClick={onSwitchColors}
-            />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <ArrowLeftRight 
+                  className="w-6 h-6 cursor-pointer hover:bg-white hover:text-[#020817] rounded p-0.5 transition-all duration-300" 
+                  onClick={onSwitchColors}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                {translations.language === 'pt-BR' ? 'Inverter cores' : 'Invert colors'}
+              </TooltipContent>
+            </Tooltip>
             <span>{backgroundColor}</span>
           </div>
         </div>

@@ -2,6 +2,7 @@
 import { Bird, Earth } from 'lucide-react';
 import { Language } from '@/utils/languageUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface LanguageToggleProps {
   currentLanguage: Language;
@@ -16,16 +17,31 @@ const LanguageToggle = ({
 }: LanguageToggleProps) => {
   return (
     <div className="flex items-center gap-4">
-      <Bird
-        className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
-        onClick={() => onLanguageChange('pt-BR')}
-        style={{ color: foregroundColor }}
-      />
-      <Earth
-        className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
-        onClick={() => onLanguageChange('en-US')}
-        style={{ color: foregroundColor }}
-      />
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Bird
+            className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
+            onClick={() => onLanguageChange('pt-BR')}
+            style={{ color: foregroundColor }}
+          />
+        </TooltipTrigger>
+        <TooltipContent>
+          {currentLanguage === 'pt-BR' ? 'Português (Brasil)' : 'Portuguese (Brazil)'}
+        </TooltipContent>
+      </Tooltip>
+      
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Earth
+            className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
+            onClick={() => onLanguageChange('en-US')}
+            style={{ color: foregroundColor }}
+          />
+        </TooltipTrigger>
+        <TooltipContent>
+          {currentLanguage === 'pt-BR' ? 'Inglês (EUA)' : 'English (USA)'}
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };
