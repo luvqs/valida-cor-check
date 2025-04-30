@@ -1,5 +1,6 @@
 
 import React from 'react';
+import logoSvg from '@/assets/logo-2024-preto.svg';
 
 const LucasVasquesLogo: React.FC = () => {
   return (
@@ -10,9 +11,9 @@ const LucasVasquesLogo: React.FC = () => {
       className="inline-block"
     >
       <img 
-        src="https://lucasvasques.com.br/wp-content/uploads/2023/12/logo-2024-preto.svg" 
+        src={logoSvg} 
         alt="Logo Lucas Vasques" 
-        className="h-6 inline-block"
+        className="h-4 inline-block"
       />
     </a>
   );

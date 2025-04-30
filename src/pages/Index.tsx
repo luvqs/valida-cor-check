@@ -1,14 +1,14 @@
 
 import { useState, useEffect, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import { Trash2, RefreshCw, Dices } from 'lucide-react';
+import { Dices, ArrowLeftRight, Trash2, Link as LinkIcon } from 'lucide-react';
 import ColorInput from '@/components/ColorInput';
 import ColorPreview from '@/components/ColorPreview';
 import LanguageToggle from '@/components/LanguageToggle';
 import { getContrastRatio, generateContrastingPair, getComplianceLevel } from '@/utils/colorUtils';
 import { Language, translations } from '@/utils/languageUtils';
-import LucasVasquesLogo from '@/components/LucasVasquesLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
+import logoSvg from '@/assets/logo-2024-preto.svg';
+import { Link } from 'react-router-dom';
 
 type HistoryItem = {
   foregroundColor: string;
@@ -82,40 +82,40 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
       <header className="p-4 flex justify-between items-center">
-        <div className="flex gap-2">
-          {!isMobile ? (
+        <div className="flex gap-4">
+          {!isMobile && (
             <>
-              <Button 
-                variant="outline" 
+              <Trash2 
+                className="h-5 w-5 cursor-pointer" 
+                style={{ color: foregroundColor }}
                 onClick={handleReset}
-                className="border-2 bg-transparent"
-                style={{ color: foregroundColor, borderColor: foregroundColor }}
-              >
-                <Trash2 className="h-5 w-5" />
-              </Button>
-              <Button 
-                variant="outline" 
+              />
+              <ArrowLeftRight 
+                className="h-5 w-5 cursor-pointer"
+                style={{ color: foregroundColor }}
                 onClick={handleInvert}
-                className="border-2 bg-transparent"
-                style={{ color: foregroundColor, borderColor: foregroundColor }}
-              >
-                <RefreshCw className="h-5 w-5" />
-              </Button>
+              />
             </>
-          ) : null}
-          <Button 
-            variant="outline" 
+          )}
+          <Dices 
+            className="h-5 w-5 cursor-pointer"
+            style={{ color: foregroundColor }}
             onClick={handleRandom}
-            className="border-2 bg-transparent"
-            style={{ color: foregroundColor, borderColor: foregroundColor }}
-          >
-            <Dices className="h-5 w-5" />
-          </Button>
+          />
         </div>
-        <LanguageToggle 
-          currentLanguage={language} 
-          onLanguageChange={setLanguage} 
-        />
+
+        <div className="flex items-center gap-4">
+          <Link to="/about">
+            <LinkIcon 
+              className="h-5 w-5 cursor-pointer" 
+              style={{ color: foregroundColor }}
+            />
+          </Link>
+          <LanguageToggle 
+            currentLanguage={language} 
+            onLanguageChange={setLanguage} 
+          />
+        </div>
       </header>
       
       <div className="flex flex-col flex-grow">
@@ -124,12 +124,16 @@ const Index = () => {
             foregroundColor={foregroundColor} 
             backgroundColor={backgroundColor}
             translations={t}
+            onSwitchColors={handleInvert}
           />
         </div>
 
         <div className="bg-background p-4 rounded-t-xl">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-6">
+              <div className="text-sm text-muted-foreground mb-1">
+                {t.contrastRatio}:
+              </div>
               <div className="text-3xl font-bold flex items-center justify-center gap-2">
                 <span>{contrastRatio}:1</span>
                 <span 
@@ -165,10 +169,20 @@ const Index = () => {
               </div>
             </div>
             
-            <footer className="mt-8 text-center text-muted-foreground">
-              <p className="flex items-center justify-center gap-2">
-                <span className="font-bold">ValidaCor</span> foi desenvolvido por <LucasVasquesLogo />
-              </p>
+            <footer className="mt-8 text-center text-muted-foreground text-xs flex justify-center items-center gap-1.5 opacity-50">
+              <span className="font-bold">ValidaCor</span> 
+              <span>foi desenvolvido por</span> 
+              <a 
+                href="https://lucasvasques.com.br/contato/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <img 
+                  src={logoSvg} 
+                  alt="Logo Lucas Vasques" 
+                  className="h-4 inline-block"
+                />
+              </a>
             </footer>
           </div>
         </div>

@@ -2,18 +2,20 @@
 import { useState, useEffect } from 'react';
 import { Translations } from '@/utils/languageUtils';
 import { Textarea } from '@/components/ui/textarea';
-import { RefreshCw } from 'lucide-react';
+import { ArrowLeftRight } from 'lucide-react';
 
 interface ColorPreviewProps {
   foregroundColor: string;
   backgroundColor: string;
   translations: Translations;
+  onSwitchColors: () => void;
 }
 
 const ColorPreview = ({
   foregroundColor,
   backgroundColor,
-  translations
+  translations,
+  onSwitchColors
 }: ColorPreviewProps) => {
   const [previewText, setPreviewText] = useState<string>(translations.testingContrast);
   const [charCount, setCharCount] = useState<number>(0);
@@ -46,9 +48,12 @@ const ColorPreview = ({
       <div className="max-w-2xl mx-auto w-full">
         <div className="mb-8 text-center">
           <h1 className="text-6xl font-bold mb-2">Aa</h1>
-          <div className="text-4xl font-bold flex justify-center items-center gap-2">
+          <div className="text-4xl font-bold flex justify-center items-center gap-4">
             <span>{foregroundColor}</span>
-            <RefreshCw className="w-6 h-6" />
+            <ArrowLeftRight 
+              className="w-6 h-6 cursor-pointer" 
+              onClick={onSwitchColors}
+            />
             <span>{backgroundColor}</span>
           </div>
         </div>
