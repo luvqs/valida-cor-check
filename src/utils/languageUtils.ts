@@ -79,7 +79,6 @@ export const translations: Record<Language, Translations> = {
     largeText: 'Large Text',
     passesAALarge: 'A',
     passesAA: 'AA',
-    passesAA: 'AA',
     passesAAALarge: 'AAA (Large)',
     passesAAA: 'AAA',
     fails: 'Fails',
