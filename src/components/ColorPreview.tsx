@@ -49,8 +49,9 @@ const ColorPreview = ({
       <div className="max-w-2xl mx-auto w-full">
         <div className="mb-8 text-center">
           <h1 className="text-6xl font-bold mb-2">Aa aa AA</h1>
-          <div className="text-4xl font-bold flex justify-center items-center gap-4">
-            <span>{foregroundColor}</span>
+          <div className="flex justify-center items-center gap-4">
+            {/* Reduced font size by 40% from text-4xl to text-2xl */}
+            <span className="text-2xl font-bold">{foregroundColor}</span>
             <Tooltip>
               <TooltipTrigger asChild>
                 <ArrowLeftRight 
@@ -62,7 +63,7 @@ const ColorPreview = ({
                 {translations.invert}
               </TooltipContent>
             </Tooltip>
-            <span>{backgroundColor}</span>
+            <span className="text-2xl font-bold">{backgroundColor}</span>
           </div>
         </div>
 
