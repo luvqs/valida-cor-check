@@ -5,7 +5,7 @@ import logoSvg from '@/assets/logo-2024-preto.svg';
 const LucasVasquesLogo: React.FC = () => {
   return (
     <a 
-      href="https://lucasvasques.com.br/contato/" 
+      href="https://lucasvasques.com.br/" 
       target="_blank" 
       rel="noopener noreferrer"
       className="inline-block"

@@ -18,11 +18,17 @@ const LanguageToggle = ({
     <div className="flex items-center gap-4">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Earth
-            className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
+          <button
+            className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1 flex items-center justify-center"
             onClick={() => onLanguageChange('en-US')}
             style={{ color: foregroundColor }}
-          />
+          >
+            <img 
+              src="https://img.icons8.com/?size=100&id=t3NE3BsOAQwq&format=png&color=000000"
+              alt="English (USA)"
+              className="w-8 h-8"
+            />
+          </button>
         </TooltipTrigger>
         <TooltipContent>
           {currentLanguage === 'pt-BR' ? 'Inglês (EUA)' : 'English (USA)'}
@@ -39,7 +45,7 @@ const LanguageToggle = ({
             <img 
               src="https://img.icons8.com/color/48/brazil-circular.png"
               alt="Português (Brasil)"
-              className="w-8 h-8" // Increased size from w-6 h-6 to w-8 h-8
+              className="w-8 h-8"
             />
           </button>
         </TooltipTrigger>
