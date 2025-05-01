@@ -1,6 +1,7 @@
 
 import { Translations } from '@/utils/languageUtils';
 import ColorInput from '@/components/ColorInput';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ColorControlsProps {
   foregroundColor: string;
@@ -17,8 +18,10 @@ const ColorControls = ({
   setBackgroundColor, 
   translations 
 }: ColorControlsProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${!isMobile ? 'max-w-[70%] mx-auto' : ''}`}>
       <div>
         <ColorInput
           title={translations.foregroundColor}
