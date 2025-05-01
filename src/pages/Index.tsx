@@ -25,10 +25,11 @@ const Index = () => {
     handleReset,
     handleInvert,
     handleRandom,
-    handleUndo
+    handleUndo,
+    handleRedo
   } = useColorState();
   
-  useKeyboardShortcuts({ onUndo: handleUndo });
+  useKeyboardShortcuts({ onUndo: handleUndo, onRedo: handleRedo });
   usePageTitle(t.appTitle);
 
   useEffect(() => {

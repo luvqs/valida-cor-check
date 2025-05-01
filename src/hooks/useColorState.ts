@@ -52,6 +52,16 @@ export function useColorState(initialForeground = '#FFB57E', initialBackground =
       setHistoryIndex(prevIndex);
     }
   }, [history, historyIndex]);
+  
+  const handleRedo = useCallback(() => {
+    if (historyIndex < history.length - 1) {
+      const nextIndex = historyIndex + 1;
+      const nextItem = history[nextIndex];
+      setForegroundColor(nextItem.foregroundColor);
+      setBackgroundColor(nextItem.backgroundColor);
+      setHistoryIndex(nextIndex);
+    }
+  }, [history, historyIndex]);
 
   return {
     foregroundColor,
@@ -62,6 +72,7 @@ export function useColorState(initialForeground = '#FFB57E', initialBackground =
     handleReset,
     handleInvert,
     handleRandom,
-    handleUndo
+    handleUndo,
+    handleRedo
   };
 }

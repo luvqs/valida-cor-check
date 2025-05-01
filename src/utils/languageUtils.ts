@@ -25,6 +25,10 @@ export interface Translations {
   testingContrast: string;
   typeYourTextHere: string;
   characters: string;
+  onlyForLargeText: string;
+  badCombination: string;
+  excellent: string;
+  decent: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -44,14 +48,18 @@ export const translations: Record<Language, Translations> = {
     contrastPreview: 'Visualização do Contraste',
     normalText: 'Texto Normal',
     largeText: 'Texto Grande',
-    passesAALarge: 'A (Fontes grandes)',
-    passesAA: 'AA (Legalzinho)',
-    passesAAALarge: 'AAA (Excelente - Grande)',
-    passesAAA: 'AAA (Excelente)',
-    fails: 'Tá bem ruim',
-    testingContrast: 'Digite alguma coisa aqui para você visualizar o contrates da frase que voce precisa testar.',
+    passesAALarge: 'A',
+    passesAA: 'AA',
+    passesAAALarge: 'AAA (Grande)',
+    passesAAA: 'AAA',
+    fails: 'Ruim',
+    testingContrast: 'Digite alguma coisa aqui para você visualizar o contraste das cores.',
     typeYourTextHere: 'Digite seu texto aqui...',
-    characters: 'caracteres'
+    characters: 'caracteres',
+    onlyForLargeText: 'Somente para fonte grande ou grossa',
+    badCombination: 'A combinação ficou ruim',
+    excellent: 'Excelente',
+    decent: 'Legalzinho'
   },
   'en-US': {
     appTitle: 'ValidaCor - Color Contrast Validator',
@@ -69,13 +77,18 @@ export const translations: Record<Language, Translations> = {
     contrastPreview: 'Contrast Preview',
     normalText: 'Normal Text',
     largeText: 'Large Text',
-    passesAALarge: 'Passes AA (Large Text)',
-    passesAA: 'Passes AA',
-    passesAAALarge: 'Passes AAA (Large Text)',
-    passesAAA: 'Passes AAA',
+    passesAALarge: 'A',
+    passesAA: 'AA',
+    passesAA: 'AA',
+    passesAAALarge: 'AAA (Large)',
+    passesAAA: 'AAA',
     fails: 'Fails',
-    testingContrast: 'Type something here to visualize the contrast of the phrase you need to test.',
+    testingContrast: 'Type something here to visualize the contrast of colors.',
     typeYourTextHere: 'Type your text here...',
-    characters: 'characters'
+    characters: 'characters',
+    onlyForLargeText: 'Only for large or thick text',
+    badCombination: 'Bad combination',
+    excellent: 'Excellent',
+    decent: 'Decent'
   }
 };

@@ -3,33 +3,53 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Language, translations } from '@/utils/languageUtils';
 import LanguageToggle from '@/components/LanguageToggle';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Link as LinkIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import Footer from '@/components/Footer';
 
 const About = () => {
   const [language, setLanguage] = useState<Language>('pt-BR');
   const t = translations[language];
+  const iconClass = "w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="p-4 flex justify-between items-center">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link to="/">
-              <ArrowLeft 
-                className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1" 
-              />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            {language === 'pt-BR' ? 'Voltar' : 'Back'}
-          </TooltipContent>
-        </Tooltip>
-        <LanguageToggle 
-          currentLanguage={language} 
-          onLanguageChange={setLanguage} 
-        />
+        <div className="flex items-center gap-6">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link to="/">
+                <ArrowLeft 
+                  className={iconClass} 
+                />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              {language === 'pt-BR' ? 'Voltar' : 'Back'}
+            </TooltipContent>
+          </Tooltip>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link to="/">
+                <LinkIcon 
+                  className={iconClass}
+                />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              {language === 'pt-BR' ? 'Sobre o ValidaCor' : 'About ValidaCor'}
+            </TooltipContent>
+          </Tooltip>
+          
+          <LanguageToggle 
+            currentLanguage={language} 
+            onLanguageChange={setLanguage} 
+          />
+        </div>
       </header>
 
       <div className="flex-grow container max-w-3xl mx-auto px-4 py-8">
@@ -127,18 +147,7 @@ const About = () => {
         </div>
       </div>
 
-      <footer className="mt-auto p-4 text-center text-[#363c4a] text-xs flex justify-center items-center gap-1.5 opacity-40">
-        <span className="font-bold">ValidaCor</span> 
-        <span>foi desenvolvido por</span> 
-        <a 
-          href="https://lucasvasques.com.br/" 
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium hover:underline"
-        >
-          @luvqs
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };

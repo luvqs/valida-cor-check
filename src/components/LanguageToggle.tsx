@@ -1,7 +1,6 @@
 
-import { Bird, Earth } from 'lucide-react';
+import { Earth } from 'lucide-react';
 import { Language } from '@/utils/languageUtils';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface LanguageToggleProps {
@@ -19,11 +18,17 @@ const LanguageToggle = ({
     <div className="flex items-center gap-4">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Bird
-            className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1"
+          <button
+            className="w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1 flex items-center justify-center"
             onClick={() => onLanguageChange('pt-BR')}
             style={{ color: foregroundColor }}
-          />
+          >
+            <img 
+              src="https://img.icons8.com/color/48/brazil-circular.png"
+              alt="Português (Brasil)"
+              className="w-6 h-6"
+            />
+          </button>
         </TooltipTrigger>
         <TooltipContent>
           {currentLanguage === 'pt-BR' ? 'Português (Brasil)' : 'Portuguese (Brazil)'}

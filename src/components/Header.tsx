@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { UndoDot, ArrowLeftRight, Dices, Link as LinkIcon } from 'lucide-react';
+import { UndoDot, Dices, Link as LinkIcon } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import { Language } from '@/utils/languageUtils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -30,35 +30,18 @@ const Header = ({
   return (
     <header className="p-4 flex justify-between items-center">
       <div className="flex gap-6">
-        {!isMobile && (
-          <>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <UndoDot 
-                  className={iconClass}
-                  style={{ color: foregroundColor }}
-                  onClick={onReset}
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                {language === 'pt-BR' ? 'Redefinir cores' : 'Reset colors'}
-              </TooltipContent>
-            </Tooltip>
-            
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <ArrowLeftRight 
-                  className={iconClass}
-                  style={{ color: foregroundColor }}
-                  onClick={onInvert}
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                {language === 'pt-BR' ? 'Inverter cores' : 'Invert colors'}
-              </TooltipContent>
-            </Tooltip>
-          </>
-        )}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <UndoDot 
+              className={iconClass}
+              style={{ color: foregroundColor }}
+              onClick={onReset}
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            {language === 'pt-BR' ? 'Redefinir cores' : 'Reset colors'}
+          </TooltipContent>
+        </Tooltip>
         
         <Tooltip>
           <TooltipTrigger asChild>
@@ -77,7 +60,7 @@ const Header = ({
       <div className="flex items-center gap-6">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Link to="/about">
+            <Link to={window.location.pathname === '/about' ? '/' : '/about'}>
               <LinkIcon 
                 className={iconClass}
                 style={{ color: foregroundColor }}
