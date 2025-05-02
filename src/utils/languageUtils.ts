@@ -53,13 +53,13 @@ export const translations: Record<Language, Translations> = {
     passesAAALarge: 'AAA (Grande)',
     passesAAA: 'AAA',
     fails: 'Ruim',
-    testingContrast: 'Digite alguma coisa aqui para você visualizar o contraste das cores.',
+    testingContrast: 'Digite algum texto aqui para visualizar o contraste das cores.',
     typeYourTextHere: 'Digite seu texto aqui...',
     characters: 'caracteres',
-    onlyForLargeText: 'Somente para fonte grande ou grossa',
-    badCombination: 'A combinação ficou ruim',
+    onlyForLargeText: 'Somente para texto grande ou espesso',
+    badCombination: 'Combinação ruim',
     excellent: 'Excelente',
-    decent: 'Legalzinho'
+    decent: 'Bom'
   },
   'en-US': {
     appTitle: 'ValidaCor - Color Contrast Validator',
@@ -82,12 +82,12 @@ export const translations: Record<Language, Translations> = {
     passesAAALarge: 'AAA (Large)',
     passesAAA: 'AAA',
     fails: 'Fails',
-    testingContrast: 'Type something here to visualize the contrast of colors.',
+    testingContrast: 'Type some text here to visualize the contrast of colors.',
     typeYourTextHere: 'Type your text here...',
     characters: 'characters',
     onlyForLargeText: 'Only for large or thick text',
     badCombination: 'Bad combination',
     excellent: 'Excellent',
-    decent: 'Decent'
+    decent: 'Good'
   }
 };

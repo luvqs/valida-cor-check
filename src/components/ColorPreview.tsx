@@ -2,10 +2,9 @@
 import { useState, useEffect } from 'react';
 import { Translations } from '@/utils/languageUtils';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeftRight, Copy } from 'lucide-react';
+import { ArrowLeftRight } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useToast } from '@/hooks/use-toast';
 
 interface ColorPreviewProps {
   foregroundColor: string;
@@ -24,7 +23,6 @@ const ColorPreview = ({
   const [charCount, setCharCount] = useState<number>(0);
   const maxChars = 200;
   const isMobile = useIsMobile();
-  const { toast } = useToast();
 
   useEffect(() => {
     setPreviewText(translations.testingContrast);
@@ -40,30 +38,6 @@ const ColorPreview = ({
       setPreviewText(text);
       setCharCount(text.length);
     }
-  };
-
-  const handleCopyUrl = () => {
-    const url = new URL(window.location.href);
-    // Clear any existing query parameters
-    url.search = '';
-    // Add the current colors as query parameters
-    url.searchParams.set('fg', foregroundColor);
-    url.searchParams.set('bg', backgroundColor);
-    
-    navigator.clipboard.writeText(url.toString())
-      .then(() => {
-        toast({
-          title: translations.copied || "Copied!",
-          description: translations.urlCopied || "URL with current colors copied to clipboard",
-        });
-      })
-      .catch(() => {
-        toast({
-          title: translations.error || "Error",
-          description: translations.copyFailed || "Failed to copy URL",
-          variant: "destructive",
-        });
-      });
   };
 
   return (
@@ -91,17 +65,6 @@ const ColorPreview = ({
               </TooltipContent>
             </Tooltip>
             <span className={isMobile ? "text-base font-bold" : "text-2xl font-bold"}>{backgroundColor}</span>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Copy 
-                  className="w-5 h-5 cursor-pointer hover:bg-white hover:text-[#020817] rounded p-0.5 transition-all duration-300" 
-                  onClick={handleCopyUrl}
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                {translations.copyUrl || "Copy URL with colors"}
-              </TooltipContent>
-            </Tooltip>
           </div>
         </div>
 
