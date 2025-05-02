@@ -5,7 +5,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeftRight } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { SplashCursor } from '@/components/ui/splash-cursor';
 
 interface ColorPreviewProps {
   foregroundColor: string;
@@ -41,18 +40,6 @@ const ColorPreview = ({
     }
   };
 
-  // Extract RGB values from hex color for the fluid simulation
-  const hexToRgb = (hex: string) => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16) / 255,
-      g: parseInt(result[2], 16) / 255,
-      b: parseInt(result[3], 16) / 255
-    } : { r: 0, g: 0, b: 0 };
-  };
-
-  const bgRgb = hexToRgb(backgroundColor);
-
   return (
     <div 
       className="w-full h-full flex flex-col items-center justify-center p-8 relative"
@@ -61,18 +48,6 @@ const ColorPreview = ({
         color: foregroundColor,
       }}
     >
-      <SplashCursor 
-        DYE_RESOLUTION={1024}
-        DENSITY_DISSIPATION={2.2}
-        VELOCITY_DISSIPATION={1.8}
-        PRESSURE={0.8}
-        SPLAT_RADIUS={0.25}
-        CURL={20}
-        SPLAT_FORCE={8000}
-        COLOR_UPDATE_SPEED={5}
-        BACK_COLOR={bgRgb}
-      />
-      
       <div className="max-w-2xl mx-auto w-full relative z-10">
         <div className="mb-8 text-center">
           <h1 className="text-6xl font-bold mb-2">Aa aa AA</h1>
