@@ -38,7 +38,7 @@ const Index = () => {
   }, [foregroundColor, backgroundColor]);
   
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor }}>
+    <div className="min-h-screen flex flex-col">
       <Header 
         language={language}
         foregroundColor={foregroundColor}
@@ -59,7 +59,7 @@ const Index = () => {
           />
         </div>
 
-        <div className="bg-background p-4 rounded-t-xl">
+        <div className="bg-background p-4 rounded-t-xl relative z-10">
           <div className="max-w-6xl mx-auto">
             <ContrastDisplay 
               contrastRatio={contrastRatio}
