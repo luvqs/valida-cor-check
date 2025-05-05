@@ -39,17 +39,17 @@ const Index = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Header 
-        language={language}
-        foregroundColor={foregroundColor}
-        backgroundColor={backgroundColor}
-        setLanguage={setLanguage}
-        onReset={handleReset}
-        onInvert={handleInvert}
-        onRandom={handleRandom}
-      />
-      
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col flex-grow" style={{ backgroundColor: backgroundColor }}>
+        <Header 
+          language={language}
+          foregroundColor={foregroundColor}
+          backgroundColor={backgroundColor}
+          setLanguage={setLanguage}
+          onReset={handleReset}
+          onInvert={handleInvert}
+          onRandom={handleRandom}
+        />
+        
         <div className="flex-grow">
           <ColorPreview 
             foregroundColor={foregroundColor} 

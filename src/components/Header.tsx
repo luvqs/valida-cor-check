@@ -28,7 +28,7 @@ const Header = ({
   const iconClass = "w-[40px] h-[40px] cursor-pointer transition-all duration-300 hover:bg-white hover:text-[#020817] rounded-md p-1";
 
   return (
-    <header className="p-4 flex justify-between items-center">
+    <header className="p-4 flex justify-between items-center bg-transparent">
       <div className="flex gap-6">
         <Tooltip>
           <TooltipTrigger asChild>
