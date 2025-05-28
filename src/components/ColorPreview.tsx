@@ -19,14 +19,16 @@ const ColorPreview = ({
   translations,
   onSwitchColors
 }: ColorPreviewProps) => {
-  const [previewText, setPreviewText] = useState<string>(translations.testingContrast);
-  const [charCount, setCharCount] = useState<number>(0);
-  const maxChars = 200;
   const isMobile = useIsMobile();
+  const maxChars = isMobile ? 50 : 200;
+  
+  const [previewText, setPreviewText] = useState<string>('');
+  const [charCount, setCharCount] = useState<number>(0);
 
   useEffect(() => {
-    setPreviewText(translations.testingContrast);
-  }, [translations]);
+    const initialText = isMobile ? 'Digite algum texto aqui...' : translations.testingContrast;
+    setPreviewText(initialText);
+  }, [translations, isMobile]);
 
   useEffect(() => {
     setCharCount(previewText.length);
@@ -74,7 +76,7 @@ const ColorPreview = ({
             onChange={handleTextChange}
             className="w-full text-xl bg-transparent border-none resize-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder-current placeholder-opacity-50 h-auto max-h-32 overflow-hidden"
             style={{ color: foregroundColor }}
-            placeholder={translations.typeYourTextHere}
+            placeholder={isMobile ? 'Digite seu texto aqui...' : translations.typeYourTextHere}
             maxLength={maxChars}
           />
           <div className="text-sm opacity-70 text-right mt-1">
