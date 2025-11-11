@@ -156,6 +156,7 @@ const ColorPreview = ({
                 onChange={handleForegroundChange}
                 onBlur={handleForegroundBlur}
                 onKeyDown={handleForegroundKeyDown}
+                maxLength={7}
                 className={isMobile ? "text-base font-bold bg-transparent border-b-2 border-current outline-none text-center w-24" : "text-2xl font-bold bg-transparent border-b-2 border-current outline-none text-center w-32"}
                 style={{ color: foregroundColor }}
               />
@@ -186,6 +187,7 @@ const ColorPreview = ({
                 onChange={handleBackgroundChange}
                 onBlur={handleBackgroundBlur}
                 onKeyDown={handleBackgroundKeyDown}
+                maxLength={7}
                 className={isMobile ? "text-base font-bold bg-transparent border-b-2 border-current outline-none text-center w-24" : "text-2xl font-bold bg-transparent border-b-2 border-current outline-none text-center w-32"}
                 style={{ color: foregroundColor }}
               />
