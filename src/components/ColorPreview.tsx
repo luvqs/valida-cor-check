@@ -92,8 +92,13 @@ const ColorPreview = ({
 
   const handleForegroundBlur = () => {
     setEditingForeground(false);
-    if (/^#[0-9A-F]{6}$/i.test(tempForeground)) {
-      onForegroundChange(tempForeground);
+    let normalizedColor = tempForeground.trim();
+    if (!normalizedColor.startsWith('#')) {
+      normalizedColor = '#' + normalizedColor;
+    }
+    if (/^#[0-9A-F]{6}$/i.test(normalizedColor)) {
+      onForegroundChange(normalizedColor);
+      setTempForeground(normalizedColor);
     } else {
       setTempForeground(foregroundColor);
     }
@@ -101,8 +106,13 @@ const ColorPreview = ({
 
   const handleBackgroundBlur = () => {
     setEditingBackground(false);
-    if (/^#[0-9A-F]{6}$/i.test(tempBackground)) {
-      onBackgroundChange(tempBackground);
+    let normalizedColor = tempBackground.trim();
+    if (!normalizedColor.startsWith('#')) {
+      normalizedColor = '#' + normalizedColor;
+    }
+    if (/^#[0-9A-F]{6}$/i.test(normalizedColor)) {
+      onBackgroundChange(normalizedColor);
+      setTempBackground(normalizedColor);
     } else {
       setTempBackground(backgroundColor);
     }
