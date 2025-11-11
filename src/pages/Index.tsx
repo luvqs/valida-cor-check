@@ -56,6 +56,8 @@ const Index = () => {
             backgroundColor={backgroundColor}
             translations={t}
             onSwitchColors={handleInvert}
+            onForegroundChange={setForegroundColor}
+            onBackgroundChange={setBackgroundColor}
           />
         </div>
 

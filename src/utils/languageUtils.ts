@@ -38,9 +38,9 @@ export const translations: Record<Language, Translations> = {
     backgroundColor: 'Cor de Fundo',
     contrastRatio: 'Taxa de Contraste',
     wcagCompliance: 'Conformidade WCAG',
-    reset: 'Redefinir',
+    reset: 'Cor anterior',
     invert: 'Inverter',
-    random: 'Aleatório',
+    random: 'Gerar cores aleatórias',
     hexLabel: 'Hexadecimal',
     hueLabel: 'Matiz',
     saturationLabel: 'Saturação',
@@ -58,8 +58,8 @@ export const translations: Record<Language, Translations> = {
     characters: 'caracteres',
     onlyForLargeText: 'Somente para texto grande ou espesso',
     badCombination: 'Combinação ruim',
-    excellent: 'Excelente',
-    decent: 'Bom'
+    excellent: 'Excelente combinação',
+    decent: 'Boa combinação'
   },
   'en-US': {
     appTitle: 'ValidaCor - Color Contrast Validator',
@@ -67,9 +67,9 @@ export const translations: Record<Language, Translations> = {
     backgroundColor: 'Background Color',
     contrastRatio: 'Contrast Ratio',
     wcagCompliance: 'WCAG Compliance',
-    reset: 'Reset',
+    reset: 'Previous color',
     invert: 'Invert',
-    random: 'Random',
+    random: 'Generate random colors',
     hexLabel: 'Hexadecimal',
     hueLabel: 'Hue',
     saturationLabel: 'Saturation',
@@ -87,7 +87,7 @@ export const translations: Record<Language, Translations> = {
     characters: 'characters',
     onlyForLargeText: 'Only for large or thick text',
     badCombination: 'Bad combination',
-    excellent: 'Excellent',
-    decent: 'Good'
+    excellent: 'Excellent combination',
+    decent: 'Good combination'
   }
 };
